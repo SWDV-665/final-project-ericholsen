@@ -23,7 +23,7 @@
 
   <!-- List of Sliding Items -->
 <ion-list>
-  <ion-item-sliding #slidingItem *ngFor="let password of passwords | search: terms | sort: {property: column, order: order}; let i = index;">
+  <ion-item-sliding #slidingItem *ngFor="let password of passwords | search: terms : column | sort: {property: column, order: order}; let i = index;">
     <ion-item>
       <ion-label>
         <h2>{{password.description}}</h2>

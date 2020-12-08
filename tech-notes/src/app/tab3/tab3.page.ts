@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
-import { PasswordsProviderService } from '../passwords-provider.service';
-import { InputDialogServiceService } from '../input-dialog-provider.service';
+import { DevicesProviderService } from '../devices-provider.service';
+import { InputDevicesProviderService } from '../input-devices-provider.service';
 /*added to enable social sharing on native device, also injected into constructor*/
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
@@ -15,13 +15,13 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 export class Tab3Page {
 
   title = "Tech Notes";
-  passwords = [];
+  devices = [];
 
   errorMessage: string;
 
   descending: boolean = true;
   order: number;
-  column: string = 'description';
+  column: string = 'name';
   terms: string;
 
   sort(){
@@ -29,60 +29,60 @@ export class Tab3Page {
     this.order = this.descending ? 1 : -1;
   }
 
-  constructor(public toastController: ToastController, public alertController: AlertController,public dataService: PasswordsProviderService, public inputDialogService: InputDialogServiceService, public socialSharing: SocialSharing) {
+  constructor(public toastController: ToastController, public alertController: AlertController,public dataService: DevicesProviderService, public inputDeviceService: InputDevicesProviderService, public socialSharing: SocialSharing) {
     dataService.dataChanged$.subscribe((dataChanged:boolean) => {
-      this.loadPasswords();
+      this.loadDevices();
     })
   }
 
   ionViewWillEnter(){
-    this.loadPasswords();
+    this.loadDevices();
     this.sort();
   }
 
-  loadPasswords() {
-    return this.dataService.getPasswords()
+  loadDevices() {
+    return this.dataService.getDevices()
     .subscribe(
-      passwords => this.passwords = passwords,
+      devices => this.devices = devices,
       error => this.errorMessage = <any>error);
   }
 
-  async removePassword(password, index) {
-    console.log("Removing Item = ", password, index);
+  async removeDevice(device, index) {
+    console.log("Removing Device = ", device, index);
     const toast = await this.toastController.create({
-      message: 'Removing ' + password.description + '...',
+      message: 'Removing ' + device.name + '...',
       duration: 2000
     });
     toast.present();
 
-    this.dataService.removePassword(password);
+    this.dataService.removeDevice(device);
   }
 
   /*slidingItem included to enable the item to slide back when done, name commes from HTML*/
-  async editPassword(password, index, slidingItem) {
-    console.log("Edit Item = ", password, password._id);
+  async editDevice(device, index, slidingItem) {
+    console.log("Edit device = ", device, device._id);
     const toast = await this.toastController.create({
-      message: 'Editing ' + password.name + '...',
+      message: 'Editing ' + device.name + '...',
       duration: 2000
     });
     toast.present();
 
-    console.log("Editing Password");
-    this.inputDialogService.showPrompt(password, password._id, slidingItem);
+    console.log("Editing deivce");
+    this.inputDeviceService.showPrompt(device, device._id, slidingItem);
 
   }
   
 
-  async addPassword() {
-    console.log("Adding Password");
-    this.inputDialogService.showPrompt();
+  async addDevice() {
+    console.log("Adding Device");
+    this.inputDeviceService.showPrompt();
   }
 
   
-  async sharePassword(password, index, slidingItem) {
-    console.log("Sharing Item = ", password, index);
+  async shareDevice(device, index, slidingItem) {
+    console.log("Sharing device = ", device, index);
     const toast = await this.toastController.create({
-      message: 'Sharing ' + password.description + '...',
+      message: 'Sharing ' + device.name + '...',
       duration: 2000
     });
     toast.present();
@@ -90,7 +90,7 @@ export class Tab3Page {
     /*needed to close the sliding items*/
     slidingItem.close();
 
-    let message = "Description: " + password.description + "  Password: " + password.password;
+    let message = "Name: " + device.name + "  User: " + device.user + " Notes: " + device.notes;
     let subject = "Shared via Tech Notes App";
 
     this.socialSharing.share(message, subject).then(() => {
