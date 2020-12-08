@@ -1,0 +1,7 @@
+{
+  "name": "tech-notes",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

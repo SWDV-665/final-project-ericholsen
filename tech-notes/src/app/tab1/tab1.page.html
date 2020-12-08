@@ -1,0 +1,62 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      {{title}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">{{title}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!--only shows if list is empty-->
+  <ion-item class="ion-text-center" *ngIf="passwords.length == 0">
+      <ion-label>List is empty.</ion-label>
+  </ion-item>
+
+<ion-searchbar [(ngModel)]="terms"></ion-searchbar>
+
+
+  <!-- List of Sliding Items -->
+<ion-list>
+  <ion-item-sliding #slidingItem *ngFor="let password of passwords | search: terms | sort: {property: column, order: order}; let i = index;">
+    <ion-item>
+      <ion-label>
+        <h2>{{password.description}}</h2>
+        <h3>{{password.password}}</h3>
+      </ion-label>
+    </ion-item>
+    <ion-item-options side="end">
+      
+      <ion-button (click)="editPassword(password, i, slidingItem)" ion-button color="primary" icon-start>
+        <ion-icon name="create"></ion-icon>
+      </ion-button>
+
+      <ion-button (click)="sharePassword(password, i, slidingItem)" ion-button color="secondary" icon-start>
+        <ion-icon name="share"></ion-icon>
+      </ion-button>
+
+      <ion-button (click)="removePassword(password, i)" ion-button color="danger" icon-start>
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+
+    </ion-item-options>
+  </ion-item-sliding>
+</ion-list>
+
+  <!-- fab placed to the bottom end -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="addPassword()" >
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+
+
+
+
+</ion-content>
