@@ -18,7 +18,7 @@
       <ion-label>List is empty.</ion-label>
   </ion-item>
 
-<ion-searchbar [(ngModel)]="terms"></ion-searchbar>
+<ion-searchbar [(ngModel)]="terms" *ngIf="passwords.length != 0"></ion-searchbar>
 
 
   <!-- List of Sliding Items -->

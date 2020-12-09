@@ -14,19 +14,14 @@
   </ion-header>
 
  <!--only shows if photos is empty-->
-<!--  <ion-item class="ion-text-center" *ngIf="photos.length == 0">
+<ion-item class="ion-text-center" *ngIf="photoService.photos.length == 0">
   <ion-label>No Photos to show.</ion-label>
 </ion-item>
 
-<ion-list>
-  <ion-item *ngFor="let photo of photos">
-    <ion-thumbnail slot="start">
-      <ion-img [src]="photo.src"></ion-img>
-    </ion-thumbnail>
-    <ion-label>{{photo.text}}</ion-label>
-  </ion-item>
-</ion-list> -->
 
+<!--code taken from here and modifed come:
+https://ionicframework.com/docs/angular/your-first-app/2-taking-photos
+-->
 <ion-grid>
   <ion-row>
   <ion-col size="12" 
@@ -44,12 +39,5 @@
     </ion-fab-button>
   </ion-fab> 
 
-<!--   <ion-content>
-    <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-      <ion-fab-button (click)="addPhotoToGallery()">
-        <ion-icon name="camera"></ion-icon>
-      </ion-fab-button>
-    </ion-fab>
-  </ion-content> -->
 
 </ion-content>

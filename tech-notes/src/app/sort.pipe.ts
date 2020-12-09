@@ -1,3 +1,7 @@
+/* code taken from here and modified: 
+https://www.djamware.com/post/5a37ceaf80aca7059c142970/ionic-3-and-angular-5-search-and-sort-list-of-data
+*/
+
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({

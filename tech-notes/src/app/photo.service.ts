@@ -1,3 +1,7 @@
+/*code taken from here and modifed come:
+https://ionicframework.com/docs/angular/your-first-app/2-taking-photos
+*/
+
 import { Injectable } from '@angular/core';
 
 import { Plugins, CameraResultType, Capacitor, FilesystemDirectory, CameraPhoto, CameraSource } from '@capacitor/core';
