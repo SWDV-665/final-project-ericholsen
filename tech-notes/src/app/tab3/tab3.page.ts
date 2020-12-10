@@ -24,6 +24,14 @@ export class Tab3Page {
   column: string = 'name';
   terms: string;
 
+  changeColumn(column) {
+    this.column = column;
+  }
+
+  getSearchPlaceholder() {
+    return "search by " + this.column;
+  }
+
   sort(){
     //this.descending = !this.descending;
     this.order = this.descending ? 1 : -1;

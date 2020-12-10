@@ -9,7 +9,7 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">{{title}}</ion-title>
+      <ion-title size="large" style="font-family:VT323; font-size: 40px">{{title}}</ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -26,8 +26,8 @@
   <ion-item-sliding #slidingItem *ngFor="let password of passwords | search: terms : column | sort: {property: column, order: order}; let i = index;">
     <ion-item>
       <ion-label>
-        <h2>{{password.description}}</h2>
-        <h3>{{password.password}}</h3>
+        <h1>{{password.description}}</h1>
+        <h2>{{password.password}}</h2>
       </ion-label>
     </ion-item>
     <ion-item-options side="end">
@@ -49,8 +49,8 @@
 </ion-list>
 
   <!-- fab placed to the bottom end -->
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="addPassword()" >
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" >
+    <ion-fab-button (click)="addPassword()">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
